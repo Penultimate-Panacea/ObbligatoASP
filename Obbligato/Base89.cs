@@ -6,11 +6,20 @@ using System.Web;
 namespace Obbligato
 {
     public class Base89 : IEquatable<Base89>
+    
     {
         //Fields
         public uint Base10Equivalent = UInt32.MaxValue;
         public char Base89Character = '\0';
-        public static char[] EquivalenceTable { get; } = new char[89] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '!', '<', '#', '$', '%', '&', '>', '(', ')', '*', '+', ',', '-', '.', '/', '[', '?', ']', '^', '_', '`', '{', '|', '}', '~', '@', '\\' };
+
+        public static char[] EquivalenceTable { get; } = new char[89]
+        {
+            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
+            'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',
+            'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '!',
+            '<', '#', '$', '%', '&', '>', '(', ')', '*', '+', ',', '-', '.', '/', '[', '?', ']', '^', '_', '`', '{',
+            '|', '}', '~', '@', '\\'
+        };
 
         //Constructors
         public Base89(uint base10Equivalent)
@@ -21,6 +30,7 @@ namespace Obbligato
                 Base89Character = CalculateBase89();
             }
         }
+
         public Base89(char base89character)
         {
             Base89Character = base89character;
@@ -29,6 +39,7 @@ namespace Obbligato
                 Base10Equivalent = CalculateBase10();
             }
         }
+
         //Methods
         private uint CalculateBase10()
         {
@@ -41,12 +52,15 @@ namespace Obbligato
                     base10 = i;
                 }
             }
+
             if (base10 == UInt32.MaxValue)
             {
-                throw new System.IndexOutOfRangeException("Base89 match not found.");
+                throw new System.ArgumentOutOfRangeException("Base89 match not found.");
             }
+
             return base10;
         }
+
         private char CalculateBase89()
         {
             uint remainder = Base10Equivalent % 89;
@@ -81,5 +95,6 @@ namespace Obbligato
         {
             return !(base1 == base2);
         }
+    
     }
 }
