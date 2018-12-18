@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  obbligato:
+    image: ${DOCKER_REGISTRY}obbligato
+    build:
+      context: .\Obbligato
+      dockerfile: Dockerfile
